@@ -456,7 +456,7 @@ Stack<T>::Stack(){
 
 template <class T>
 bool Stack<T>::isEmpty(){
-    return _size;
+    return (_size == 0);
 }
 
 template <class T>

@@ -8,9 +8,7 @@ int main(){
     s1.push(5);
     s1.push(6);
     s1.push(7);
-    // s1.clear();
-    s1.print();
-    s1.print();
+    s1.clear();
     cout << s1.isEmpty();
     // d1.insertAtTail(1);
     // d1.insertAtTail(2);
