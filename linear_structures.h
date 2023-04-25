@@ -700,7 +700,7 @@ void doublyLinkedList<T>::clear(){
 }
 
 // --------------------------------------------------------------------------------------------------------------------------
-
+//Stack
 template<class T>
 class Stack{
     struct Node{
@@ -793,5 +793,103 @@ void Stack<T>::print(){
     }
 }
 
+//-------------------------------
+//Queue
+template<class T>
+class Queue {
+    struct Node {
+        Node *next;
+        T item;
+    };
+    int length;
+    Node *front, *end;
+public:
+    Queue();
+    void enqueue(T element);
+    T dequeue();
+    T first();
+    bool isEmpty();
+    int queueSize();
+    void clear();
+    void print();
+};
 
+template<class T>
+Queue<T>::Queue() {
+    front = end = NULL;
+    length=0;
+}
 
+template<class T>
+void Queue<T>::enqueue(T element) {
+    Node* node = new Node;
+    node->item=element;
+    node->next=NULL;
+    if(isEmpty()){
+        front=end=node;
+    }
+    else{
+        end->next=node;
+        end=node;
+    }
+    length++;
+}
+
+template<class T>
+T Queue<T>::dequeue() {
+    if(isEmpty())
+        cout<<"Empty Queue!\n";
+    else{
+        front = front->next;
+        length--;
+    }
+}
+
+template<class T>
+T Queue<T>::first() {
+    if(isEmpty())
+        cout<<"Empty Queue!\n";
+    else{
+        return front->item;
+    }
+}
+
+template<class T>
+bool Queue<T>::isEmpty() {
+    return (length==0);
+}
+
+template<class T>
+int Queue<T>::queueSize() {
+    return length;
+}
+
+template<class T>
+void Queue<T>::clear() {
+    if (isEmpty())
+        cout << "The Queue is empty!\n";
+    else {
+        Node *current;
+        while (front != NULL) {
+            current = front;
+            front = front->next;
+            delete current;
+        }
+        front = end = NULL;
+        length = 0;
+    }
+}
+
+template<class T>
+void Queue<T>::print(){
+    if(isEmpty())
+        cout<<"The Queue is empty!\n";
+    else {
+        Node *current = front;
+        while (current != NULL) {
+            cout << current->item << " ";
+            current = current->next;
+        }
+        cout << '\n';
+    }
+}
