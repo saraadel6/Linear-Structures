@@ -305,7 +305,7 @@ void singleLinkedList<T>::replaceAt(T newElement, int index) {
         cout << "OUT OF RANGE!\n";
     else {
         Node *node = head;
-        for (int i = 1; i < index; i++) {
+        for (int i = 1; i <= index; i++) {
             node = node->next;
         }
         node->item = newElement;
