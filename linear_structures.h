@@ -137,7 +137,7 @@ template<class T>
 void arrayBasedList<T>::clear(){
     length = 0;
 }
-// -------------------------------------------------------------------------------------------
+// #####################################################################################################################
 //Single Linked List
 template <class T>
 class singleLinkedList{
@@ -305,7 +305,7 @@ void singleLinkedList<T>::replaceAt(T newElement, int index) {
         cout << "OUT OF RANGE!\n";
     else {
         Node *node = head;
-        for (int i = 1; i < index; i++) {
+        for (int i = 1; i <= index; i++) {
             node = node->next;
         }
         node->item = newElement;
@@ -405,14 +405,14 @@ void singleLinkedList<T>::clear() {
 }
 
 template<class T>
-void singleLinkedList<T>::print(){
+void singleLinkedList<T>::print() {
     Node* node=head;
     while(node!=NULL){
         cout << node->item << " ";
         node=node->next;
     }
 }
-// -------------------------------------------------------------------------------------------
+// #####################################################################################################################
 //Doubly Linked List
 template<class T>
 class doublyLinkedList {
@@ -447,13 +447,13 @@ public:
 };
 
 template<class T>
-doublyLinkedList<T>::doublyLinkedList(){
+doublyLinkedList<T>::doublyLinkedList() {
     first = last = NULL;
     length = 0;
 }
 
 template<class T>
-void doublyLinkedList<T>::insertAtHead(T element){
+void doublyLinkedList<T>::insertAtHead(T element) {
     Node newNode = new Node;
     newNode -> item = element;
     if(length == 0){
@@ -468,7 +468,7 @@ void doublyLinkedList<T>::insertAtHead(T element){
 }
 
 template<class T>
-void doublyLinkedList<T>::insertAtTail(T element){
+void doublyLinkedList<T>::insertAtTail(T element) {
     Node* newNode = new Node;
     newNode -> item = element;
     if(length == 0){
@@ -484,18 +484,18 @@ void doublyLinkedList<T>::insertAtTail(T element){
 }
 
 template<class T>
-void doublyLinkedList<T>::insertAt(T element, int index){
+void doublyLinkedList<T>::insertAt(T element, int index) {
     Node* newNode = new Node;
     newNode->item = element;
     if (index < 0 || index > length)
         cout << "Out Of Range ...!\n";
     else if(index == 0){
         insertAtHead(element);
-    } else if(index == length){
+    } else if(index == length) {
         insertAtTail(element);
     } else {
         Node* curr = first;
-        for(int i = 1; i < index; ++i){
+        for(int i = 1; i < index; ++i) {
             curr = curr->next;
         }
         curr->next = newNode;
@@ -509,11 +509,11 @@ void doublyLinkedList<T>::insertAt(T element, int index){
 
 
 template<class T>
-void doublyLinkedList<T>::insertAfter(Node* prevNode, T data){
+void doublyLinkedList<T>::insertAfter(Node* prevNode, T data) {
     Node* newNode = new Node;
     newNode->item = data;
     Node* curr = first;
-    while(curr->item != prevNode->item){
+    while(curr->item != prevNode->item) {
         curr = curr-> next;
     } 
     curr->next = newNode;
@@ -524,21 +524,21 @@ void doublyLinkedList<T>::insertAfter(Node* prevNode, T data){
 }
 
 template<class T>
-bool doublyLinkedList<T>::isEmpty(){
+bool doublyLinkedList<T>::isEmpty() {
     return (length == 0);
 }
 
 template<class T>
-bool doublyLinkedList<T>::isItemAtEqual(T element, int index){
+bool doublyLinkedList<T>::isItemAtEqual(T element, int index) {
     if (index < 0 || index >= length){
         cout << "Out Of Range ...!\n";
         return false;
     } else {
         Node* temp = first;
-        for(int i = 1; i <= index; ++i){
+        for(int i = 1; i <= index; ++i) {
             temp = temp->next;
         }
-        if(temp->item == element){
+        if(temp->item == element) {
             return true;
         } 
         return false;
@@ -546,7 +546,7 @@ bool doublyLinkedList<T>::isItemAtEqual(T element, int index){
 }
 
 template<class T>
-bool doublyLinkedList<T>::isExist(T element){
+bool doublyLinkedList<T>::isExist(T element) {
     Node* temp = first;
     for(int i = 1; i <= length; ++i){
         if(temp->item == element){
@@ -557,7 +557,7 @@ bool doublyLinkedList<T>::isExist(T element){
     return false;
 }
 template<class T>
-void doublyLinkedList<T>::removeAtHead(){
+void doublyLinkedList<T>::removeAtHead() {
     if(isEmpty()){
         cout << "Can not remove from empty llist.\n";
     } else if (length == 1) {
@@ -574,7 +574,7 @@ void doublyLinkedList<T>::removeAtHead(){
 }
 
 template<class T>
-void doublyLinkedList<T>::removeAtTail(){
+void doublyLinkedList<T>::removeAtTail() {
     if(isEmpty()){
         cout << "Can not remove from empty llist.\n";
     } else if (length == 1) {
@@ -591,7 +591,7 @@ void doublyLinkedList<T>::removeAtTail(){
 }
 
 template<class T>
-void doublyLinkedList<T>::removeAt(int index){
+void doublyLinkedList<T>::removeAt(int index) {
     if (index < 0 || index >= length)
         cout << "Out Of Range ...!\n";
     else if(index == 0){
@@ -689,24 +689,23 @@ void doublyLinkedList<T>::backwardTraversal(){
 }
 
 template<class T>
-void doublyLinkedList<T>::clear(){
+void doublyLinkedList<T>::clear() {
     Node* curr = new Node;
-    while(first != NULL){
+    while(first != NULL) {
         curr = first;
         first = first->next;
         delete first;
     }
     length = 0;
 }
-
-// --------------------------------------------------------------------------------------------------------------------------
+// #####################################################################################################################
 //Stack
 template<class T>
-class Stack{
-    struct Node{
+class Stack {
+    struct Node {
         T val;
         Node* next;
-        Node(T val, Node* next){
+        Node(T val, Node* next) {
             this->val = val;
             this->next = next;
         }
@@ -726,24 +725,24 @@ public:
 };
 
 template <class T>
-Stack<T>::Stack(){
+Stack<T>::Stack() {
     head = NULL;
     _size = 0;
 }
 
 template <class T>
-bool Stack<T>::isEmpty(){
+bool Stack<T>::isEmpty() {
     return (_size == 0);
 }
 
 template <class T>
-void Stack<T>::push(T newElement){
+void Stack<T>::push(T newElement) {
     head = new Node(newElement, head);
     ++_size;
 }
 template <class T>
-void Stack<T>::pop(){
-    if(_size == 0){
+void Stack<T>::pop() {
+    if(_size == 0) {
         cout << "The stack is empty!\n";
     } else {
         Node* temp = head; 
@@ -754,8 +753,8 @@ void Stack<T>::pop(){
 }
 
 template <class T>
-T Stack<T>::top(){
-    if(_size == 0){
+T Stack<T>::top() {
+    if(_size == 0) {
         cout << "The stack is empty!\n";
         return 0;
     } else {
@@ -764,14 +763,14 @@ T Stack<T>::top(){
 }
 
 template <class T>
-int Stack<T>::stackSize(){
+int Stack<T>::stackSize() {
     return (_size == 0);
 }
 
 template <class T>
-void Stack<T>::clear(){
+void Stack<T>::clear() {
     Node* temp = new Node();
-    while(head != NULL){
+    while(head != NULL) {
         temp = head;
         head = head->next;
         delete temp;
@@ -780,12 +779,12 @@ void Stack<T>::clear(){
 }
 
 template <class T>
-void Stack<T>::print(){
-    if(head == NULL){
+void Stack<T>::print() {
+    if(head == NULL) {
     cout << "The stack is empty!\n";
     } else{
         Node* curr = head;
-        while(curr != NULL){
+        while(curr != NULL) {
             cout << curr->val << ' ';
             curr = curr->next;
         }
@@ -793,7 +792,7 @@ void Stack<T>::print(){
     }
 }
 
-//-------------------------------
+// #####################################################################################################################
 //Queue
 template<class T>
 class Queue {
