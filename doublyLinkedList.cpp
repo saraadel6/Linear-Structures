@@ -239,11 +239,38 @@ void doublyLinkedList<T>::swap(int firstItemIdx, int secondItemIdx){
 
 template<class T>
 void doublyLinkedList<T>::reverse(){
-    Node* temp = first;
-    while(temp != NULL){
-
+    Node* temp = NULL;
+    Node* curr = first;
+    while (curr != NULL) {
+        temp = curr->prev;
+        curr->prev = curr->next;
+        curr->next = temp;
+        curr = curr->prev;
     }
+    if (temp != NULL)
+        first = temp->prev;
 }
+
+// /* Function to reverse a Doubly Linked List */
+// void reverse(struct Node** head_ref)
+// {
+//     struct Node* temp = NULL;
+//     struct Node* current = *head_ref;
+ 
+//     /* swap next and prev for all nodes of
+//       doubly linked list */
+//     while (current != NULL) {
+//         temp = current->prev;
+//         current->prev = current->next;
+//         current->next = temp;
+//         current = current->prev;
+//     }
+ 
+//     /* Before changing head, check for the cases like empty
+//        list and list with only one node */
+//     if (temp != NULL)
+//         *head_ref = temp->prev;
+// }
 
 template<class T>
 void doublyLinkedList<T>::forwardTraversal(){

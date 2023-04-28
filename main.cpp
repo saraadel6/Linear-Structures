@@ -7,18 +7,14 @@
 
 
 int main(){
-    singleLinkedList<int> l;
-    l.insertAtTail(0);
+    doublyLinkedList<int> l;
+    l.insertAtTail(1);
     l.insertAtTail(2);
     l.insertAtTail(3);
-    l.insertAtTail(0);
     l.insertAtTail(4);
     l.insertAtTail(5);
-    l.insertAtTail(0);
-    Node<int>* first = combineNodesBetweenZeros(l.getHead());
-    l.printByHead(first);
-
-
+    l.reverse();
+    l.forwardTraversal();
     // singleLinkedList<int> list1;
     // list1.insertAtTail(1);
     // list1.insertAtTail(4);
