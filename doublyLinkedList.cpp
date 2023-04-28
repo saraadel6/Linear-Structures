@@ -24,7 +24,7 @@ public:
     void replaceAt(T newElement, int index);
     bool isExist (T element);
     bool isItemAtEqual(T element, int index);
-    void  swap (int firstItemIdx, int secondItemIdx);
+    void swap (int firstItemIdx, int secondItemIdx);
     void reverse();
     bool isEmpty();
     int doubleLinkedListSize();
