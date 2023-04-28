@@ -13,7 +13,7 @@ int main(){
     l.insertAtTail(3);
     l.insertAtTail(4);
     l.insertAtTail(5);
-    l.reverse();
+    l.swap(1, 4);
     l.forwardTraversal();
     // singleLinkedList<int> list1;
     // list1.insertAtTail(1);

@@ -234,7 +234,36 @@ int doublyLinkedList<T>::doubleLinkedListSize(){
 
 template<class T>
 void doublyLinkedList<T>::swap(int firstItemIdx, int secondItemIdx){
+    if (firstItemIdx == secondItemIdx || firstItemIdx<0 || secondItemIdx<0)
+        return;
 
+    Node *node1 = first;
+    Node *prev1 = NULL;
+    for (int i = 0; i < firstItemIdx && node1 != NULL; i++) {
+        prev1 = node1;
+        node1 = node1->next;
+    }
+    Node* node2 = first;
+    Node* prev2 = NULL;
+    for (int i = 0; i < secondItemIdx && node2 != NULL; i++) {
+        prev2 = node2;
+        node2 = node2->next;
+    }
+
+    if (node1 == NULL || node2 == NULL) {
+        return;
+    }
+    if (prev1 != NULL)
+        prev1->next = node2;
+    else
+        first = node2;
+    if (prev2 != NULL)
+        prev2->next = node1;
+    else
+        first = node1;
+    Node* temp = node1->next;
+    node1->next = node2->next;
+    node2->next = temp;
 }
 
 template<class T>
