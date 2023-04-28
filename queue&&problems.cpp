@@ -125,3 +125,33 @@ void QueueBinaryNumbers(int n) {
     }
 }
 
+//##########################################################################################################################
+
+template <class T>
+class StackFromQueue{
+    Queue<T>queue1,queue2;
+public:
+
+    void push(T element){
+        queue1.enqueue(element);
+    }
+
+    T pop(){
+        if(queue1.isEmpty()){
+            cout<<"Empty Stack!\n";
+            return T();
+        }
+        while (queue1.queueSize() > 1) {
+            T element = queue1.dequeue();
+            queue2.enqueue(element);
+        }
+        T element = queue1.dequeue();
+        Queue<T> temp = queue1;
+        queue1 = queue2;
+        queue2 = temp;
+        return element;
+    }
+    void print(){
+        queue1.print();
+    }
+};
