@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 // Array-Based List
@@ -140,13 +140,16 @@ void arrayBasedList<T>::clear(){
 // #####################################################################################################################
 //Single Linked List
 template <class T>
+struct Node {
+public:
+    T item;
+    Node *next;
+};
+template <class T>
 class singleLinkedList{
-    struct Node{
-        T item;
-        Node* next;
-    };
-    Node* head;
-    Node* tail;
+
+    Node<T> *head;
+    Node<T> *tail;
     int length;
 public:
     singleLinkedList();
@@ -165,6 +168,9 @@ public:
     int singleLinkedListSize();
     void clear();
     void print();
+    Node<T>* getHead() {
+        return head;
+    }
 };
 
 template<class T>
@@ -175,7 +181,7 @@ singleLinkedList<T>::singleLinkedList() {
 
 template<class T>
 void singleLinkedList<T>::insertAtHead(T element) {
-    Node* node = new Node;
+    Node<T> *node = new Node<T>();
     node->item=element;
     if(isEmpty()){
         head=tail=node;
@@ -190,7 +196,7 @@ void singleLinkedList<T>::insertAtHead(T element) {
 
 template<class T>
 void singleLinkedList<T>::insertAtTail(T element) {
-    Node* node=new Node;
+    Node<T> *node = new Node<T>();
     node->item=element;
     if(isEmpty()){
         head=tail=node;
@@ -213,9 +219,9 @@ void singleLinkedList<T>::insertAt(T element, int index) {
     else if(index==length)
         insertAtTail(element);
     else{
-        Node* node = new Node;
+        Node<T> *node = new Node<T>();
         node -> item = element;
-        Node* current = head;
+        Node<T> *current = head;
         for(int i=1; i<index; i++){
             current=current->next;
         }
@@ -250,8 +256,8 @@ void singleLinkedList<T>::removeAtTail() {
         length--;
     }
     else{
-        Node* node=head;
-        Node* nextNode=head->next;
+        Node<T> *node=head;
+        Node<T> *nextNode=head->next;
         while(nextNode!=tail){
             node=nextNode;
             nextNode=nextNode->next;
@@ -272,8 +278,8 @@ void singleLinkedList<T>::removeAt(int index) {
     else if (index==length)
         removeAtTail();
     else{
-        Node* node = head;
-        Node* nextNode=head->next;
+        Node<T> *node = head;
+        Node<T> *nextNode=head->next;
         for(int i=1; i<index; i++){
             node=nextNode;
             nextNode=nextNode->next;
@@ -291,7 +297,7 @@ T singleLinkedList<T>::retrieveAt(int index) {
         return 0;
     }
     else {
-        Node *node = head;
+        Node<T> *node = head;
         for (int i = 1; i < index; i++) {
             node = node->next;
         }
@@ -304,7 +310,7 @@ void singleLinkedList<T>::replaceAt(T newElement, int index) {
     if (index < 0 || index > length)
         cout << "OUT OF RANGE!\n";
     else {
-        Node *node = head;
+        Node<T> *node = head;
         for (int i = 1; i <= index; i++) {
             node = node->next;
         }
@@ -314,14 +320,14 @@ void singleLinkedList<T>::replaceAt(T newElement, int index) {
 
 template<class T>
 bool singleLinkedList<T>::isExist(T element) {
-    Node *node = head;
+    Node<T> *node = head;
     for (int i = 0; i < length; i++) {
         if (node->item == element) {
             cout<<"YES, EXIST\n";
             return true;
         }
         node = node->next;
-        }
+    }
     cout<<"NOT EXIST!\n";
     return false;
 }
@@ -333,7 +339,7 @@ bool singleLinkedList<T>::isItemAtEqual(T element, int index) {
         return 0;
     }
     else {
-        Node* node = head;
+        Node<T> *node = head;
         for(int i = 1; i <= index; ++i){
             node = node->next;
         }
@@ -353,14 +359,14 @@ void singleLinkedList<T>::swap(int firstItemIdx, int secondItemIdx) {
     if (firstItemIdx == secondItemIdx || firstItemIdx<0 || secondItemIdx<0)
         return;
 
-    Node* node1 = head;
-    Node* prev1 = NULL;
+    Node<T> *node1 = head;
+    Node<T> *prev1 = NULL;
     for (int i = 0; i < firstItemIdx && node1 != NULL; i++) {
         prev1 = node1;
         node1 = node1->next;
     }
-    Node* node2 = head;
-    Node* prev2 = NULL;
+    Node<T> *node2 = head;
+    Node<T> *prev2 = NULL;
     for (int i = 0; i < secondItemIdx && node2 != NULL; i++) {
         prev2 = node2;
         node2 = node2->next;
@@ -377,7 +383,7 @@ void singleLinkedList<T>::swap(int firstItemIdx, int secondItemIdx) {
         prev2->next = node1;
     else
         head = node1;
-    Node* temp = node1->next;
+    Node<T> *temp = node1->next;
     node1->next = node2->next;
     node2->next = temp;
 }
@@ -394,7 +400,7 @@ int singleLinkedList<T>::singleLinkedListSize() {
 
 template<class T>
 void singleLinkedList<T>::clear() {
-    Node* current;
+    Node<T> *current;
     while(head!=NULL){
         current=head;
         head=head->next;
@@ -406,11 +412,12 @@ void singleLinkedList<T>::clear() {
 
 template<class T>
 void singleLinkedList<T>::print() {
-    Node* node=head;
+    Node<T> *node = head;
     while(node!=NULL){
         cout << node->item << " ";
         node=node->next;
     }
+    cout<<endl;
 }
 // #####################################################################################################################
 //Doubly Linked List
