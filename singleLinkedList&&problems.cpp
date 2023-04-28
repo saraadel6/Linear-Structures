@@ -30,6 +30,7 @@ public:
     int singleLinkedListSize();
     void clear();
     void print();
+    void printByHead(Node<T>* first);
     Node<T>* getHead() {
         return head;
     }
@@ -281,6 +282,16 @@ void singleLinkedList<T>::print() {
     }
     cout<<endl;
 }
+
+template<class T>
+void singleLinkedList<T>::printByHead(Node<T>* first) {
+    Node<T> *node = first;
+    while(node!=NULL){
+        cout << node->item << " ";
+        node=node->next;
+    }
+    cout<<endl;
+}
 // #####################################################################################################################
 
 template<class T>
@@ -326,4 +337,23 @@ singleLinkedList<T> mergeLists(singleLinkedList<T>* list, int n) {
     singleLinkedList<T> left = mergeLists(list, middle);
     singleLinkedList<T> right = mergeLists(list + middle, n - middle);
     return merge(left, right);
+}
+// ########################################################################################################################
+template<class T>
+Node<T>* combineNodesBetweenZeros(Node<T>* head) {
+Node<T>* curr = head->next;
+
+while (curr) {
+    Node<T>* running = curr;
+    int sum = 0;
+    while (running->item) {
+    sum += running->item;
+    running = running->next;
+    }
+    curr->item = sum;
+    curr->next = running->next;
+    curr = running->next;
+}
+
+return head->next;
 }
