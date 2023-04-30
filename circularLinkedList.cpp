@@ -251,6 +251,64 @@ bool circularLinkedList<T>::isItemAtEqual(T element, int index)
 }
 
 template <class T>
+void circularLinkedList<T>::swap(int firstItemIdx, int secondItemIdx)
+{
+    if (firstItemIdx == secondItemIdx){
+        cout<<"The same index!\n";
+        return;
+
+    }
+    if (firstItemIdx < 0 || firstItemIdx >= length || secondItemIdx < 0 || secondItemIdx >= length)
+    {
+        cout << "OUT OF RANGE!\n";
+        return;
+    }
+    Node *prev_first = NULL;
+    Node *first = head;
+    if (firstItemIdx == 0) {
+        prev_first = tail;
+    }
+    for (int i = 0; i < firstItemIdx; i++)
+    {
+        prev_first = first;
+        first = first->next;
+    }
+    Node *prev_second = NULL;
+    Node *second = head;
+    if (secondItemIdx == 0) {
+        prev_second = tail;
+    }
+    for (int i = 0; i < secondItemIdx; i++)
+    {
+        prev_second = second;
+        second = second->next;
+    }
+    if (prev_first != NULL)
+        prev_first->next = second;
+    else
+        head = second;
+
+    if (prev_second != NULL)
+        prev_second->next = first;
+    else
+        head = first;
+
+    Node *temp = first->next;
+    first->next = second->next;
+    second->next = temp;
+
+    if (first == tail)
+        tail = second;
+    else if (second == tail)
+        tail = first;
+
+    if (firstItemIdx == 0)
+        head = second;
+    else if (secondItemIdx == 0)
+        head = first;
+}
+
+template <class T>
 bool circularLinkedList<T>::isEmpty()
 {
     return (length == 0);
