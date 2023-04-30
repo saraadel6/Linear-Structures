@@ -2,13 +2,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 template<class T>
+struct Node {
+public:
+    Node *next;
+    T item;
+};
+template<class T>
 class Queue {
-    struct Node {
-        Node *next;
-        T item;
-    };
+
     int length;
-    Node *front, *end;
+    Node<T> *front, *end;
 public:
     Queue();
     void enqueue(T element);
@@ -18,6 +21,9 @@ public:
     int queueSize();
     void clear();
     void print();
+    void setFront(Node<T>* node);
+    Node<T>* getFront();
+    void setEnd(Node<T>* node);
 };
 
 template<class T>
@@ -28,7 +34,7 @@ Queue<T>::Queue() {
 
 template<class T>
 void Queue<T>::enqueue(T element) {
-    Node* node = new Node;
+    Node<T>* node = new Node<T>();
     node->item=element;
     node->next=NULL;
     if(isEmpty()){
@@ -45,18 +51,26 @@ template<class T>
 T Queue<T>::dequeue() {
     if(isEmpty()){
         cout<<"Empty Queue!\n";
-        return T(); // Return default value of T
+        return T();
+    }
+    else if (length == 1)
+    {
+        T item = front->item;
+        delete front;
+        end = NULL;
+        length = 0;
+        return item;
+
     }
     else{
         T item = front->item;
-        Node* temp = front;
+        Node<T> *temp = front;
         front = front->next;
         delete temp;
         length--;
         return item;
     }
 }
-
 template<class T>
 T Queue<T>::first() {
     if(isEmpty()){
@@ -83,12 +97,13 @@ void Queue<T>::clear() {
     if (isEmpty())
         cout << "The Queue is empty!\n";
     else {
-        Node *current;
+        Node<T> *current;
         while (front != NULL) {
             current = front;
             front = front->next;
             delete current;
         }
+        delete end;
         front = end = NULL;
         length = 0;
     }
@@ -99,13 +114,26 @@ void Queue<T>::print(){
     if(isEmpty())
         cout<<"The Queue is empty!\n";
     else {
-        Node *current = front;
+        Node<T> *current = front;
         while (current != NULL) {
             cout << current->item << " ";
             current = current->next;
         }
         cout << '\n';
     }
+}
+template<class T>
+Node<T> *Queue<T>::getFront() {
+    return front;
+}
+
+template<class T>
+void Queue<T>::setFront(Node<T>* node) {
+    front= node;
+}
+template<class T>
+void Queue<T>::setEnd(Node<T>* node) {
+    end= node;
 }
 
 //##########################################################################################################################
@@ -155,3 +183,40 @@ public:
         queue1.print();
     }
 };
+
+//##########################################################################################################################
+template<class T>
+void sort(Queue<T>&queue) {
+    if (queue.isEmpty()) {
+        return;
+    }
+    int size = queue.queueSize();
+    for (int i = 0; i < size - 1; i++) {
+        Node<T>* current = queue.getFront();
+        Node<T>* prev = NULL;
+        while (current != NULL && current->next != NULL) {
+            if (current->item > current->next->item) {
+                if (prev != NULL) {
+                    prev->next = current->next;
+                }
+                else {
+                    queue.setFront(current->next) ;
+                }
+                Node<T>* temp = current->next->next;
+                current->next->next = current;
+                current->next = temp;
+                if (temp == NULL) {
+                    queue.setEnd(current->next);
+                }
+                if (prev == NULL)
+                    current = queue.getFront();
+                else
+                    current = prev->next;
+            }
+            else {
+                prev = current;
+                current = current->next;
+            }
+        }
+    }
+}
