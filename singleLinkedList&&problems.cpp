@@ -355,4 +355,8 @@ while (curr) {
     curr = running->next;
 }
 return head->next;
+// Node<T>* temp = head;
+// head = head->next;
+// delete temp;
+// return head;
 }
