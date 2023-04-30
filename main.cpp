@@ -6,16 +6,13 @@
 #include"queue&&problems.cpp"
 
 int main(){
-    singleLinkedList<int> l;
-    l.insertAtTail(0);
+    doublyLinkedList<int> l;
+    l.insertAtTail(1);
+    l.insertAtTail(2);
     l.insertAtTail(3);
     l.insertAtTail(4);
-    l.insertAtTail(0);
     l.insertAtTail(5);
-    l.insertAtTail(8);
-    l.insertAtTail(0);
-    l.insertAtTail(1);
-    l.insertAtTail(1);
-    l.insertAtTail(0); 
-    l.printByHead(combineNodesBetweenZeros(l.getHead()));
+    l.insertAtTail(6);
+    l.insertAfter(l.getHead()->next->next->next->next, 44);
+    l.forwardTraversal();
 }

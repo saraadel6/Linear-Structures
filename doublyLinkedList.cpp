@@ -31,6 +31,9 @@ public:
     void clear();
     void forwardTraversal();
     void backwardTraversal();
+    Node* getHead(){
+        return first;
+    }
 };
 
 template<class T>
@@ -41,7 +44,7 @@ doublyLinkedList<T>::doublyLinkedList() {
 
 template<class T>
 void doublyLinkedList<T>::insertAtHead(T element) {
-    Node newNode = new Node;
+    Node* newNode = new Node;
     newNode -> item = element;
     if(length == 0){
         first = last = newNode;
@@ -85,11 +88,11 @@ void doublyLinkedList<T>::insertAt(T element, int index) {
         for(int i = 1; i < index; ++i) {
             curr = curr->next;
         }
-        curr->next = newNode;
-        curr->next->prev = newNode;
         newNode->next = curr->next;
-        newNode->prev= curr;
-        ++length;
+        newNode->prev = curr;
+        curr->next->prev = newNode;
+        curr->next = newNode;
+        length++;
     }
 }
 
@@ -97,16 +100,16 @@ void doublyLinkedList<T>::insertAt(T element, int index) {
 
 template<class T>
 void doublyLinkedList<T>::insertAfter(Node* prevNode, T data) {
+    if(prevNode->next->next->next == NULL){
+        cout << "Out of range...!\n";
+        return;
+    }
+    Node* curr = prevNode;
     Node* newNode = new Node;
     newNode->item = data;
-    Node* curr = first;
-    while(curr->item != prevNode->item) {
-        curr = curr-> next;
-    } 
-    curr->next = newNode;
-    curr->next->prev = newNode;
     newNode->next = curr->next;
-    newNode->prev= curr;
+    newNode->prev = curr;
+    curr->next = newNode;
     ++length;
 }
 
