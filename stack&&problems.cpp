@@ -17,7 +17,7 @@ class Stack {
 public:
     Stack();
     void push(T newElement);
-    void pop();
+    T pop();
     T top();
     bool isEmpty();
     int stackSize();
@@ -42,14 +42,17 @@ void Stack<T>::push(T newElement) {
     ++_size;
 }
 template <class T>
-void Stack<T>::pop() {
+T Stack<T>::pop() {
     if(_size == 0) {
         cout << "The stack is empty!\n";
+        return 0;
     } else {
+        T poppedItem = head->val;
         Node* temp = head; 
         head = head->next;
         delete temp;
         --_size;
+        return poppedItem;
     }
 }
 
