@@ -45,7 +45,7 @@ template <class T>
 T Stack<T>::pop() {
     if(_size == 0) {
         cout << "The stack is empty!\n";
-        return 0;
+        return T();
     } else {
         T poppedItem = head->val;
         Node* temp = head; 

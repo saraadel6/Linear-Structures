@@ -354,6 +354,5 @@ while (curr) {
     curr->next = running->next;
     curr = running->next;
 }
-
 return head->next;
 }
