@@ -6,10 +6,11 @@
 #include"queue&&problems.cpp"
 
 int main(){ 
-    Stack<int> s;
-    s.push(1);
-    s.push(2);
-    s.push(3);
-    s.push(4);
-    s.print();
+    arrayBasedList<int> a;
+    a.insert(1);
+    a.insert(2);
+    a.insert(3);
+    cout << a.isItemAtEqual(2, 1) << '\n';
+    cout << a.listSize() << "\n";
+    a.print();
 }

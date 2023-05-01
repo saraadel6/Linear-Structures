@@ -10,6 +10,11 @@ class arrayBasedList
     int length;
 
 public:
+    arrayBasedList (){
+        maxSize = 100;
+        length = 0;
+        list = new int[maxSize];
+    };
     arrayBasedList(int size);
     void insert(T element);
     void insertAt(T element, int index);
@@ -26,8 +31,7 @@ public:
 };
 
 template <class T>
-arrayBasedList<T>::arrayBasedList(int size)
-{
+arrayBasedList<T>::arrayBasedList(int size) {
     if (size <= 0)
     {
         cout << "Incorrect initial size for the array.\n";
@@ -42,8 +46,7 @@ arrayBasedList<T>::arrayBasedList(int size)
 }
 
 template <class T>
-void arrayBasedList<T>::insert(T element)
-{
+void arrayBasedList<T>::insert(T element) {
     if (isFull())
     {
         cout << "The list is full.\n";
@@ -55,8 +58,7 @@ void arrayBasedList<T>::insert(T element)
 }
 
 template <class T>
-void arrayBasedList<T>::removeAt(int index)
-{
+void arrayBasedList<T>::removeAt(int index) {
     if (index < 0 || index > length)
     {
         cout << "Out of range.\n";
@@ -72,8 +74,7 @@ void arrayBasedList<T>::removeAt(int index)
 }
 
 template <class T>
-void arrayBasedList<T>::replaceAt(T newElement, int index)
-{
+void arrayBasedList<T>::replaceAt(T newElement, int index) {
     if (index < 0 || index > length)
     {
         cout << "Out of range.\n";
@@ -85,8 +86,7 @@ void arrayBasedList<T>::replaceAt(T newElement, int index)
 }
 
 template <class T>
-void arrayBasedList<T>::insertAt(T element, int index)
-{
+void arrayBasedList<T>::insertAt(T element, int index) {
     if (isFull())
     {
         cout << "The list is full.\n";
@@ -107,8 +107,7 @@ void arrayBasedList<T>::insertAt(T element, int index)
 }
 
 template <class T>
-bool arrayBasedList<T>::isEmpty()
-{
+bool arrayBasedList<T>::isEmpty() {
     if (length == 0)
     {
         return true;
@@ -120,8 +119,7 @@ bool arrayBasedList<T>::isEmpty()
 }
 
 template <class T>
-bool arrayBasedList<T>::isFull()
-{
+bool arrayBasedList<T>::isFull() {
     if (length == maxSize)
     {
         return true;
@@ -133,8 +131,7 @@ bool arrayBasedList<T>::isFull()
 }
 
 template <class T>
-bool arrayBasedList<T>::isItemAtEqual(T element, int index)
-{
+bool arrayBasedList<T>::isItemAtEqual(T element, int index) {
     if (index >= length || index < 0)
     {
         return false;
@@ -146,30 +143,25 @@ bool arrayBasedList<T>::isItemAtEqual(T element, int index)
 }
 
 template <class T>
-int arrayBasedList<T>::maxListSize()
-{
+int arrayBasedList<T>::maxListSize() {
     return maxSize;
 }
 
 template <class T>
-int arrayBasedList<T>::listSize()
-{
+int arrayBasedList<T>::listSize() {
     return length;
 }
 
 template <class T>
-arrayBasedList<T>::~arrayBasedList()
-{
+arrayBasedList<T>::~arrayBasedList() {
     delete[] list;
 }
 
 template <class T>
-void arrayBasedList<T>::print()
-{
+void arrayBasedList<T>::print() {
     if (isEmpty())
         cout << "The array is empty.\n";
-    else
-    {
+    else {
         for (int i = 0; i < length; ++i)
         {
             cout << list[i] << ' ';
@@ -179,7 +171,6 @@ void arrayBasedList<T>::print()
 }
 
 template <class T>
-void arrayBasedList<T>::clear()
-{
+void arrayBasedList<T>::clear() {
     length = 0;
 }
