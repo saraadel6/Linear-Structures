@@ -6,9 +6,9 @@ class Stack {
     struct SNode {
         T val;
         SNode* next;
-        SNode(T value, SNode* nextNode) {
-            this->val = value;
-            this->next = nextNode;
+        SNode(T val, SNode* node) {
+            this->val = val;
+            this->next = node;
         }
         SNode(){}
     };
