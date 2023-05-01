@@ -2,16 +2,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 template<class T>
-struct Node_ {
+struct QNode {
 public:
-    Node_ *next;
+    QNode *next;
     T item;
 };
 template<class T>
 class Queue {
-
     int length;
-    Node_<T> *front, *end;
+    QNode<T> *front, *end;
 public:
     Queue();
     void enqueue(T element);
@@ -21,9 +20,9 @@ public:
     int queueSize();
     void clear();
     void print();
-    void setFront(Node_<T>* node);
-    Node_<T>* getFront();
-    void setEnd(Node_<T>* node);
+    void setFront(QNode<T>* node);
+    QNode<T>* getFront();
+    void setEnd(QNode<T>* node);
 };
 
 template<class T>
@@ -34,7 +33,7 @@ Queue<T>::Queue() {
 
 template<class T>
 void Queue<T>::enqueue(T element) {
-    Node_<T>* node = new Node_<T>();
+    QNode<T>* node = new QNode<T>();
     node->item=element;
     node->next=NULL;
     if(isEmpty()){
@@ -64,7 +63,7 @@ T Queue<T>::dequeue() {
     }
     else{
         T item = front->item;
-        Node_<T> *temp = front;
+        QNode<T> *temp = front;
         front = front->next;
         delete temp;
         length--;
@@ -97,7 +96,7 @@ void Queue<T>::clear() {
     if (isEmpty())
         cout << "The Queue is empty!\n";
     else {
-        Node_<T> *current;
+        QNode<T> *current;
         while (front != NULL) {
             current = front;
             front = front->next;
@@ -114,7 +113,7 @@ void Queue<T>::print(){
     if(isEmpty())
         cout<<"The Queue is empty!\n";
     else {
-        Node_<T> *current = front;
+        QNode<T> *current = front;
         while (current != NULL) {
             cout << current->item << " ";
             current = current->next;
@@ -123,16 +122,16 @@ void Queue<T>::print(){
     }
 }
 template<class T>
-Node_<T> *Queue<T>::getFront() {
+QNode<T> *Queue<T>::getFront() {
     return front;
 }
 
 template<class T>
-void Queue<T>::setFront(Node_<T>* node) {
+void Queue<T>::setFront(QNode<T>* node) {
     front= node;
 }
 template<class T>
-void Queue<T>::setEnd(Node_<T>* node) {
+void Queue<T>::setEnd(QNode<T>* node) {
     end= node;
 }
 
@@ -161,12 +160,7 @@ class StackFromQueue{
 public:
 
     void push(T element){
-        int size = queue1.queueSize();
         queue1.enqueue(element);
-        for (int i = 0; i < size; i++) {
-            T item = queue1.dequeue();
-            queue1.enqueue(item);
-        }
     }
 
     T pop(){
@@ -197,8 +191,8 @@ void sort(Queue<T>&queue) {
     }
     int size = queue.queueSize();
     for (int i = 0; i < size - 1; i++) {
-        Node_<T>* current = queue.getFront();
-        Node_<T>* prev = NULL;
+        QNode<T>* current = queue.getFront();
+        QNode<T>* prev = NULL;
         while (current != NULL && current->next != NULL) {
             if (current->item > current->next->item) {
                 if (prev != NULL) {
@@ -207,7 +201,7 @@ void sort(Queue<T>&queue) {
                 else {
                     queue.setFront(current->next) ;
                 }
-                Node_<T>* temp = current->next->next;
+                QNode<T>* temp = current->next->next;
                 current->next->next = current;
                 current->next = temp;
                 if (temp == NULL) {

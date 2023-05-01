@@ -3,16 +3,16 @@
 using namespace std;
 template<class T>
 class Stack {
-    struct Node {
+    struct SNode {
         T val;
-        Node* next;
-        Node(T val, Node* next) {
-            this->val = val;
-            this->next = next;
+        SNode* next;
+        SNode(T value, SNode* nextNode) {
+            this->val = value;
+            this->next = nextNode;
         }
-        Node(){}
+        SNode(){}
     };
-    Node* head;
+    SNode* head;
     int _size;
 public:
     Stack();
@@ -38,7 +38,7 @@ bool Stack<T>::isEmpty() {
 
 template <class T>
 void Stack<T>::push(T newElement) {
-    head = new Node(newElement, head);
+    head = new SNode(newElement, head);
     ++_size;
 }
 template <class T>
@@ -48,7 +48,7 @@ T Stack<T>::pop() {
         return T();
     } else {
         T poppedItem = head->val;
-        Node* temp = head; 
+        SNode* temp = head; 
         head = head->next;
         delete temp;
         --_size;
@@ -73,7 +73,7 @@ int Stack<T>::stackSize() {
 
 template <class T>
 void Stack<T>::clear() {
-    Node* temp = new Node();
+    SNode* temp = new SNode();
     while(head != NULL) {
         temp = head;
         head = head->next;
@@ -87,7 +87,7 @@ void Stack<T>::print() {
     if(head == NULL) {
     cout << "The stack is empty!\n";
     } else{
-        Node* curr = head;
+        SNode* curr = head;
         while(curr != NULL) {
             cout << curr->val << ' ';
             curr = curr->next;
