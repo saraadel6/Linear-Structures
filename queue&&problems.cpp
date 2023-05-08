@@ -136,6 +136,7 @@ void Queue<T>::setEnd(QNode<T>* node) {
 }
 
 //##########################################################################################################################
+//problems
 
 void QueueBinaryNumbers(int n) {
     Queue <string> queue1;
